@@ -239,41 +239,41 @@ public class MainForm {
         grid.setVgap(10);
 
         grid.add(new Label("Номер:"), 0, 1);
-        grid.add(new Label(document.getNumber()), 0, 2);
-        grid.add(new Label("Дата:"), 0, 3);
-        grid.add(new Label(document.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))), 0, 4);
-        grid.add(new Label("Пользователь:"), 0, 5);
-        grid.add(new Label(document.getUserName()), 0, 6);
+        grid.add(new Label(document.getNumber()), 1, 1);
+        grid.add(new Label("Дата:"), 0, 2);
+        grid.add(new Label(document.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))), 1, 2);
+        grid.add(new Label("Пользователь:"), 0, 3);
+        grid.add(new Label(document.getUserName()), 1, 3);
 
 
         if (document instanceof WayBill) {
-            grid.add(new Label("Сумма:"), 0, 7);
-            grid.add(new Label(Integer.toString(document.getSum())), 0, 8);
-            grid.add(new Label("Валюта:"), 0, 9);
-            grid.add(new Label(((WayBill) document).getCurrency()), 0, 10);
-            grid.add(new Label("Курс валюты:"), 0, 11);
-            grid.add(new Label(Integer.toString(((WayBill) document).getCurrencyRate())), 0, 12);
-            grid.add(new Label("Товар:"), 0, 13);
-            grid.add(new Label(((WayBill) document).getProduct()), 0, 14);
-            grid.add(new Label("Количество:"), 0, 15);
-            grid.add(new Label(Integer.toString(((WayBill) document).getAmount())), 0, 16);
+            grid.add(new Label("Сумма:"), 0, 4);
+            grid.add(new Label(Integer.toString(document.getSum())), 1, 4);
+            grid.add(new Label("Валюта:"), 0, 5);
+            grid.add(new Label(((WayBill) document).getCurrency()), 1, 5);
+            grid.add(new Label("Курс валюты:"), 0, 6);
+            grid.add(new Label(Integer.toString(((WayBill) document).getCurrencyRate())), 1, 6);
+            grid.add(new Label("Товар:"), 0, 7);
+            grid.add(new Label(((WayBill) document).getProduct()), 1, 7);
+            grid.add(new Label("Количество:"), 0, 8);
+            grid.add(new Label(Integer.toString(((WayBill) document).getAmount())), 1, 8);
 
         } else if (document instanceof Payment) {
-            grid.add(new Label("Сумма:"), 0, 7);
-            grid.add(new Label(Integer.toString(document.getSum())), 0, 8);
-            grid.add(new Label("Сотрудник:"), 0, 9);
-            grid.add(new Label(((Payment) document).getEmployee()), 0, 10);
+            grid.add(new Label("Сумма:"), 0, 4);
+            grid.add(new Label(Integer.toString(document.getSum())), 1, 4);
+            grid.add(new Label("Сотрудник:"), 0, 5);
+            grid.add(new Label(((Payment) document).getEmployee()), 1, 5);
         } else if (document instanceof Bid) {
-            grid.add(new Label("Контрагент:"), 0, 7);
-            grid.add(new Label(((Bid) document).getCounteragent()), 0, 8);
-            grid.add(new Label("Сумма:"), 0, 9);
-            grid.add(new Label(Integer.toString(document.getSum())), 0, 10);
-            grid.add(new Label("Валюта:"), 0, 11);
-            grid.add(new Label(((Bid) document).getCurrency()), 0, 12);
-            grid.add(new Label("Курс валюты:"), 0, 13);
-            grid.add(new Label(Integer.toString(((Bid) document).getCurrencyRate())), 0, 14);
-            grid.add(new Label("Комиссия:"), 0, 15);
-            grid.add(new Label(Integer.toString(((Bid) document).getCommission())), 0, 16);
+            grid.add(new Label("Контрагент:"), 0, 4);
+            grid.add(new Label(((Bid) document).getCounteragent()), 1, 4);
+            grid.add(new Label("Сумма:"), 0, 5);
+            grid.add(new Label(Integer.toString(document.getSum())), 1, 5);
+            grid.add(new Label("Валюта:"), 0, 6);
+            grid.add(new Label(((Bid) document).getCurrency()), 1, 6);
+            grid.add(new Label("Курс валюты:"), 0, 7);
+            grid.add(new Label(Integer.toString(((Bid) document).getCurrencyRate())), 1, 7);
+            grid.add(new Label("Комиссия:"), 0, 8);
+            grid.add(new Label(Integer.toString(((Bid) document).getCommission())), 1, 8);
         }
 
         alert.getDialogPane().setContent(grid);
