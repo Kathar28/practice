@@ -1,11 +1,9 @@
 package com.app.formapplication;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-public class Application extends javafx.application.Application {
+public class JavaFXApplication extends javafx.application.Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("Тест");
@@ -15,12 +13,9 @@ public class Application extends javafx.application.Application {
         primaryStage.setScene(form.getMainScene());
 
         primaryStage.show();
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent e) {
-                Platform.exit();
-                System.exit(0);
-            }
+        primaryStage.setOnCloseRequest(e -> {
+            Platform.exit();
+            System.exit(0);
         });
     }
 

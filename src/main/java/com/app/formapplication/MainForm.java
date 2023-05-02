@@ -91,9 +91,7 @@ public class MainForm {
         Button buttonLoad = new Button("Загрузить");
         buttonLoad.setMaxWidth(Double.MAX_VALUE);
 
-        buttonLoad.setOnAction(actionEvent -> {
-            loadFile();
-        });
+        buttonLoad.setOnAction(actionEvent -> loadFile());
 
         Button buttonView = new Button("Просмотр");
         buttonView.setMaxWidth(Double.MAX_VALUE);
@@ -105,9 +103,7 @@ public class MainForm {
 
         Button buttonDelete = new Button("Удалить");
         buttonDelete.setMaxWidth(Double.MAX_VALUE);
-        buttonDelete.setOnAction(actionEvent -> {
-            removeSelectedItemsFromDocumentList();
-        });
+        buttonDelete.setOnAction(actionEvent -> removeSelectedItemsFromDocumentList());
 
         Button buttonExit = new Button("Выход");
         buttonExit.setOnAction(actionEvent -> {
@@ -146,7 +142,7 @@ public class MainForm {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    nameLabel.setText(item.getDocumentType() + " от " +
+                    nameLabel.setText(item.getDocumentType().getTypeName() + " от " +
                             item.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
                             " номер " + item.getNumber());
                     nameLabel.setWrapText(true);
@@ -180,35 +176,14 @@ public class MainForm {
         fileChooser.getExtensionFilters().add(extFilter);
 
         String content = "";
-        if (document instanceof WayBill) {
-            WayBill wayBill = (WayBill) document;
-            content = "Номер: " + wayBill.getNumber() +
-                    "\n" + "Дата: " + wayBill.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
-                    "\n" + "Пользователь: " + wayBill.getUserName() +
-                    "\n" + "Сумма: " + wayBill.getSum() +
-                    "\n" + "Валюта: " + wayBill.getCurrency() +
-                    "\n" + "Курс валюты: " + wayBill.getCurrencyRate() +
-                    "\n" + "Товар: " + wayBill.getProduct() +
-                    "\n" + "Количество: " + wayBill.getAmount();
+        if (document instanceof WayBill wayBill) {
+            content = wayBill.toString();
         }
-        if (document instanceof Bid) {
-            Bid bid = (Bid) document;
-            content = "Номер: " + bid.getNumber() +
-                    "\n" + "Дата: " + bid.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
-                    "\n" + "Пользователь: " + bid.getUserName() +
-                    "\n" + "Контрагент: " + bid.getCounteragent() +
-                    "\n" + "Сумма: " + bid.getSum() +
-                    "\n" + "Валюта: " + bid.getCurrency() +
-                    "\n" + "Курс валюты: " + bid.getCurrencyRate() +
-                    "\n" + "Комиссия: " + bid.getCommission();
+        if (document instanceof Bid bid) {
+            content = bid.toString();
         }
-        if (document instanceof Payment) {
-            Payment payment = (Payment) document;
-            content = "Номер: " + payment.getNumber() +
-                    "\n" + "Дата: " + payment.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
-                    "\n" + "Пользователь: " + payment.getUserName() +
-                    "\n" + "Сумма: " + payment.getSum() +
-                    "\n" + "Сотрудник: " + payment.getEmployee();
+        if (document instanceof Payment payment) {
+            content = payment.toString();
         }
 
         File file = fileChooser.showSaveDialog(parentStage);
@@ -228,7 +203,7 @@ public class MainForm {
 
     public void showDocumentProperties(Document document) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(document.getDocumentType());
+        alert.setTitle(document.getDocumentType().getTypeName());
         alert.setHeaderText(null);
         alert.getDialogPane().setGraphic(null);
         alert.getDialogPane().setPrefWidth(200);
@@ -246,34 +221,34 @@ public class MainForm {
         grid.add(new Label(document.getUserName()), 1, 3);
 
 
-        if (document instanceof WayBill) {
+        if (document instanceof WayBill wayBill) {
             grid.add(new Label("Сумма:"), 0, 4);
             grid.add(new Label(Integer.toString(document.getSum())), 1, 4);
             grid.add(new Label("Валюта:"), 0, 5);
-            grid.add(new Label(((WayBill) document).getCurrency()), 1, 5);
+            grid.add(new Label(wayBill.getCurrency()), 1, 5);
             grid.add(new Label("Курс валюты:"), 0, 6);
-            grid.add(new Label(Integer.toString(((WayBill) document).getCurrencyRate())), 1, 6);
+            grid.add(new Label(Integer.toString(wayBill.getCurrencyRate())), 1, 6);
             grid.add(new Label("Товар:"), 0, 7);
-            grid.add(new Label(((WayBill) document).getProduct()), 1, 7);
+            grid.add(new Label(wayBill.getProduct()), 1, 7);
             grid.add(new Label("Количество:"), 0, 8);
-            grid.add(new Label(Integer.toString(((WayBill) document).getAmount())), 1, 8);
+            grid.add(new Label(Integer.toString(wayBill.getAmount())), 1, 8);
 
-        } else if (document instanceof Payment) {
+        } else if (document instanceof Payment payment) {
             grid.add(new Label("Сумма:"), 0, 4);
             grid.add(new Label(Integer.toString(document.getSum())), 1, 4);
             grid.add(new Label("Сотрудник:"), 0, 5);
-            grid.add(new Label(((Payment) document).getEmployee()), 1, 5);
-        } else if (document instanceof Bid) {
+            grid.add(new Label(payment.getEmployee()), 1, 5);
+        } else if (document instanceof Bid bid) {
             grid.add(new Label("Контрагент:"), 0, 4);
-            grid.add(new Label(((Bid) document).getCounteragent()), 1, 4);
+            grid.add(new Label(bid.getCounteragent()), 1, 4);
             grid.add(new Label("Сумма:"), 0, 5);
             grid.add(new Label(Integer.toString(document.getSum())), 1, 5);
             grid.add(new Label("Валюта:"), 0, 6);
-            grid.add(new Label(((Bid) document).getCurrency()), 1, 6);
+            grid.add(new Label(bid.getCurrency()), 1, 6);
             grid.add(new Label("Курс валюты:"), 0, 7);
-            grid.add(new Label(Integer.toString(((Bid) document).getCurrencyRate())), 1, 7);
+            grid.add(new Label(Integer.toString(bid.getCurrencyRate())), 1, 7);
             grid.add(new Label("Комиссия:"), 0, 8);
-            grid.add(new Label(Integer.toString(((Bid) document).getCommission())), 1, 8);
+            grid.add(new Label(Integer.toString(bid.getCommission())), 1, 8);
         }
 
         alert.getDialogPane().setContent(grid);
@@ -326,8 +301,7 @@ public class MainForm {
             try {
                 switch (documentType) {
                     case "Накладная":
-                        return new WayBill(documentType,
-                                data.get("Номер"),
+                        return new WayBill(data.get("Номер"),
                                 LocalDate.parse(data.get("Дата"), DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                                 data.get("Пользователь"),
                                 Integer.parseInt(data.get("Сумма")),
@@ -336,8 +310,7 @@ public class MainForm {
                                 data.get("Товар"),
                                 Integer.parseInt(data.get("Количество")));
                     case "Заявка на оплату":
-                        return new Bid(documentType,
-                                data.get("Номер"),
+                        return new Bid(data.get("Номер"),
                                 LocalDate.parse(data.get("Дата"), DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                                 data.get("Пользователь"),
                                 Integer.parseInt(data.get("Сумма")),
@@ -346,8 +319,7 @@ public class MainForm {
                                 Integer.parseInt(data.get("Курс валюты")),
                                 Integer.parseInt(data.get("Комиссия")));
                     case "Платёжка":
-                        return new Payment(documentType,
-                                data.get("Номер"),
+                        return new Payment(data.get("Номер"),
                                 LocalDate.parse(data.get("Дата"), DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                                 data.get("Пользователь"),
                                 Integer.parseInt(data.get("Сумма")),

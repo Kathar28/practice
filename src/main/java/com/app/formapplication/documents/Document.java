@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
 
 public abstract class Document {
 
-    private final String documentType;
+    private final DocumentType documentType;
 
     private String number;
 
@@ -19,10 +19,10 @@ public abstract class Document {
 
     private int sum;
 
-    private boolean selected = false;
+    private boolean selected;
 
 
-    public Document(String documentType, String number, LocalDate date, String userName, int sum) {
+    protected Document(DocumentType documentType, String number, LocalDate date, String userName, int sum) {
         this.documentType = documentType;
         this.number = number;
         this.date = date;
@@ -30,7 +30,7 @@ public abstract class Document {
         this.sum = sum;
     }
 
-    public String getDocumentType() {
+    public DocumentType getDocumentType() {
         return documentType;
     }
 

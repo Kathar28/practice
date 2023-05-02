@@ -1,7 +1,7 @@
 package com.app.formapplication.documents;
 
-import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Bid extends Document {
 
@@ -13,9 +13,9 @@ public class Bid extends Document {
 
     private int commission;
 
-    public Bid(String documentType, String number, LocalDate date, String userName, int sum, String counteragent,
-               String currency, int currencyRate, int commission) throws ParseException {
-        super(documentType, number, date, userName, sum);
+    public Bid(String number, LocalDate date, String userName, int sum, String counteragent,
+               String currency, int currencyRate, int commission) {
+        super(DocumentType.BID, number, date, userName, sum);
         this.counteragent = counteragent;
         this.currency = currency;
         this.currencyRate = currencyRate;
@@ -36,5 +36,17 @@ public class Bid extends Document {
 
     public int getCommission() {
         return commission;
+    }
+
+    @Override
+    public String toString() {
+        return "Номер: " + getNumber() +
+                "\n" + "Дата: " + getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
+                "\n" + "Пользователь: " + getUserName() +
+                "\n" + "Контрагент: " + getCounteragent() +
+                "\n" + "Сумма: " + getSum() +
+                "\n" + "Валюта: " + getCurrency() +
+                "\n" + "Курс валюты: " + getCurrencyRate() +
+                "\n" + "Комиссия: " + getCommission();
     }
 }

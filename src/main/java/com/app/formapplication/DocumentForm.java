@@ -1,9 +1,6 @@
 package com.app.formapplication;
 
-import com.app.formapplication.documents.Bid;
-import com.app.formapplication.documents.Document;
-import com.app.formapplication.documents.Payment;
-import com.app.formapplication.documents.WayBill;
+import com.app.formapplication.documents.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
@@ -14,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
@@ -49,7 +47,7 @@ public class DocumentForm {
         number.setAlignment(Pos.CENTER_LEFT);
 
         TextField numberInput = new TextField();
-        numberInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        numberInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         numberInput.setPrefHeight(10);
 
         Label date = new Label("Дата");
@@ -63,14 +61,14 @@ public class DocumentForm {
         userName.setAlignment(Pos.CENTER_LEFT);
 
         TextField userNameInput = new TextField();
-        userNameInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        userNameInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         userNameInput.setPrefHeight(10);
 
         Label sum = new Label("Сумма");
         sum.setAlignment(Pos.CENTER_LEFT);
 
         TextField sumInput = new TextField();
-        sumInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        sumInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         sumInput.setPrefHeight(10);
         sumInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -86,14 +84,14 @@ public class DocumentForm {
         currency.setAlignment(Pos.CENTER_LEFT);
 
         TextField currencyInput = new TextField();
-        currencyInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        currencyInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         currencyInput.setPrefHeight(10);
 
         Label currencyRate = new Label("Курс валюты");
         currencyRate.setAlignment(Pos.CENTER_LEFT);
 
         TextField currencyRateInput = new TextField();
-        currencyRateInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        currencyRateInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         currencyRateInput.setPrefHeight(10);
         currencyRateInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -109,14 +107,14 @@ public class DocumentForm {
         product.setAlignment(Pos.CENTER_LEFT);
 
         TextField productInput = new TextField();
-        productInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        productInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         productInput.setPrefHeight(10);
 
         Label amount = new Label("Количество");
         amount.setAlignment(Pos.CENTER_LEFT);
 
         TextField amountInput = new TextField();
-        amountInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        amountInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         amountInput.setPrefHeight(10);
         amountInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -136,7 +134,7 @@ public class DocumentForm {
             try {
                 if (validateFormFields(container)) {
                     buttonSubmit.setDisable(false);
-                    documentList.getItems().add(new WayBill("Накладная", numberInput.getText(), dateInput.getValue(),
+                    documentList.getItems().add(new WayBill(numberInput.getText(), dateInput.getValue(),
                             userNameInput.getText(), Integer.parseInt(sumInput.getText()), currencyInput.getText(),
                             Integer.parseInt(currencyRateInput.getText()), productInput.getText(), Integer.parseInt(amountInput.getText())));
                     parentStage.close();
@@ -166,7 +164,7 @@ public class DocumentForm {
         number.setAlignment(Pos.CENTER_LEFT);
 
         TextField numberInput = new TextField();
-        numberInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        numberInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         numberInput.setPrefHeight(10);
 
         Label date = new Label("Дата");
@@ -181,14 +179,14 @@ public class DocumentForm {
         userName.setAlignment(Pos.CENTER_LEFT);
 
         TextField userNameInput = new TextField();
-        userNameInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        userNameInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         userNameInput.setPrefHeight(10);
 
         Label sum = new Label("Сумма");
         sum.setAlignment(Pos.CENTER_LEFT);
 
         TextField sumInput = new TextField();
-        sumInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        sumInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         sumInput.setPrefHeight(10);
         sumInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -204,7 +202,7 @@ public class DocumentForm {
         employee.setAlignment(Pos.CENTER_LEFT);
 
         TextField employeeInput = new TextField();
-        employeeInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        employeeInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         employeeInput.setPrefHeight(10);
 
         Button buttonSubmit = new Button("Ок");
@@ -214,7 +212,7 @@ public class DocumentForm {
             try {
                 if (validateFormFields(container)) {
                     buttonSubmit.setDisable(false);
-                        documentList.getItems().add(new Payment("Платёжка", numberInput.getText(),
+                        documentList.getItems().add(new Payment(numberInput.getText(),
                                 dateInput.getValue(), userNameInput.getText(), Integer.parseInt(sumInput.getText()), employeeInput.getText()));
                         parentStage.close();
                 } else {
@@ -243,7 +241,7 @@ public class DocumentForm {
         number.setAlignment(Pos.CENTER_LEFT);
 
         TextField numberInput = new TextField();
-        numberInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        numberInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         numberInput.setPrefHeight(10);
 
         Label date = new Label("Дата");
@@ -257,21 +255,21 @@ public class DocumentForm {
         userName.setAlignment(Pos.CENTER_LEFT);
 
         TextField userNameInput = new TextField();
-        userNameInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        userNameInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         userNameInput.setPrefHeight(10);
 
         Label counteragent = new Label("Контрагент");
         counteragent.setAlignment(Pos.CENTER_LEFT);
 
         TextField counteragentInput = new TextField();
-        counteragentInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        counteragentInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         counteragentInput.setPrefHeight(10);
 
         Label sum = new Label("Сумма");
         sum.setAlignment(Pos.CENTER_LEFT);
 
         TextField sumInput = new TextField();
-        sumInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        sumInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         sumInput.setPrefHeight(10);
         sumInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -287,14 +285,14 @@ public class DocumentForm {
         currency.setAlignment(Pos.CENTER_LEFT);
 
         TextField currencyInput = new TextField();
-        currencyInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        currencyInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         currencyInput.setPrefHeight(10);
 
         Label currencyRate = new Label("Курс валюты");
         currencyRate.setAlignment(Pos.CENTER_LEFT);
 
         TextField currencyRateInput = new TextField();
-        currencyRateInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        currencyRateInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         currencyRateInput.setPrefHeight(10);
         currencyRateInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -311,7 +309,7 @@ public class DocumentForm {
         commission.setAlignment(Pos.CENTER_LEFT);
 
         TextField commissionInput = new TextField();
-        commissionInput.setPrefWidth(TextArea.USE_COMPUTED_SIZE);
+        commissionInput.setPrefWidth(Region.USE_COMPUTED_SIZE);
         commissionInput.setPrefHeight(10);
         commissionInput.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -328,19 +326,15 @@ public class DocumentForm {
         buttonSubmit.setAlignment(Pos.CENTER);
 
         buttonSubmit.setOnAction(actionEvent -> {
-            try {
                 if (validateFormFields(container)) {
                     buttonSubmit.setDisable(false);
-                        documentList.getItems().add(new Bid("Заявка на оплату", numberInput.getText(), dateInput.getValue(),
+                        documentList.getItems().add(new Bid(numberInput.getText(), dateInput.getValue(),
                                 userNameInput.getText(), Integer.parseInt(sumInput.getText()), counteragentInput.getText(), currencyInput.getText(),
                                 Integer.parseInt(currencyRateInput.getText()), Integer.parseInt(commissionInput.getText())));
                         parentStage.close();
                 } else {
                     alertMessage("Не все поля заполнены");
                 }
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
-            }
 
         });
         HBox buttonBox = new HBox(buttonSubmit);
